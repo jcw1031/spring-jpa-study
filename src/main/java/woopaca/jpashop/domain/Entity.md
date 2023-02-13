@@ -3,7 +3,8 @@
 
 ## 테이블 설계
 
-!! 사진 !!
+<img width="988" alt="스크린샷 2023-02-09 오후 7 39 00" src="https://user-images.githubusercontent.com/69714701/218437668-1146d2b9-3236-4f42-9ba7-dc5efcefa366.png">
+
 
 - `Item` 테이블은 싱글 테이블 전략을 사용했다. → 한 테이블에 모든 정보를 넣고 구분 값(`dtype`)으로 구부하여 사용한다.
 - `Orders` 테이블은 데이터베이스 예약어인 `ORDER` 때문에 관례상 `Orders`로 많이 사용한다.
