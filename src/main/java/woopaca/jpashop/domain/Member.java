@@ -22,7 +22,6 @@ public class Member {
     @Column(name = "membeer_id")
     private Long id;
     private String name;
-
     @Embedded
     private Address address;
 
