@@ -1,20 +1,21 @@
 package woopaca.jpashop.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import woopaca.jpashop.domain.Member;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository // Spring Bean으로 등록
+@RequiredArgsConstructor
 public class MemberRepository {
 
     /*// EntityManagerFactory를 직접 주입받을 수도 있다.
     @PersistenceUnit
     private EntityManagerFactory emf;*/
 
-    @PersistenceContext // JPA가 제공하는 표준 Annotation. Spring이 EntityManager를 만들어서 주입
+    //    @PersistenceContext // JPA가 제공하는 표준 Annotation. Spring이 EntityManager를 만들어서 주입
     private EntityManager em;
 
     public void save(Member member) {
