@@ -16,7 +16,7 @@ public class MemberRepository {
     private EntityManagerFactory emf;*/
 
     //    @PersistenceContext // JPA가 제공하는 표준 Annotation. Spring이 EntityManager를 만들어서 주입
-    private EntityManager em;
+    private final EntityManager em;
 
     public void save(Member member) {
         // persist() -> 영속성 컨텍스트에 Member Entity를 넣는다. (나중에 transaction이 commit되는 시점에 DB에 insert 쿼리가 날라간다.)
