@@ -2,7 +2,7 @@ package woopaca.jpashop.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
-import woopaca.jpashop.exception.NotEnuoughStockException;
+import woopaca.jpashop.exception.NotEnoughStockException;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -46,7 +46,7 @@ public abstract class Item {
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {
-            throw new NotEnuoughStockException("Need more stock.");
+            throw new NotEnoughStockException("Need more stock.");
         }
         this.stockQuantity = restStock;
     }
