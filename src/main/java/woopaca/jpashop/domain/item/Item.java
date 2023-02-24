@@ -1,7 +1,9 @@
 package woopaca.jpashop.domain.item;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import woopaca.jpashop.exception.NotEnoughStockException;
 
 import javax.persistence.Column;
@@ -20,6 +22,8 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
+@NoArgsConstructor
+@SuperBuilder
 public abstract class Item {
 
     @Id
@@ -29,6 +33,13 @@ public abstract class Item {
     private String name;
     private int price;
     private int stockQuantity;
+
+    public Item(String name, int price, int stockQuantity, List<Category> categories) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.categories = categories;
+    }
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
