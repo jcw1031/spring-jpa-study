@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import woopaca.jpashop.domain.item.Book;
+import woopaca.jpashop.domain.item.Item;
 import woopaca.jpashop.service.ItemService;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,5 +38,12 @@ public class ItemController {
 
         itemService.saveItem(book);
         return "redirect:/items";
+    }
+
+    @GetMapping("")
+    public String list(Model model) {
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "items/itemList";
     }
 }
