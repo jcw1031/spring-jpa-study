@@ -34,15 +34,16 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
-    public Item(String name, int price, int stockQuantity, List<Category> categories) {
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
+
+    public Item(Long id, String name, int price, int stockQuantity, List<Category> categories) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.categories = categories;
     }
-
-    @ManyToMany(mappedBy = "items")
-    private List<Category> categories = new ArrayList<>();
 
     /**
      * 재고량 증가

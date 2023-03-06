@@ -20,9 +20,9 @@ public class Book extends Item {
     private String author;
     private String isbn;
 
-    public Book(String name, int price, int stockQuantity, List<Category> categories,
+    public Book(Long id, String name, int price, int stockQuantity, List<Category> categories,
                 String author, String isbn) {
-        super(name, price, stockQuantity, categories);
+        super(id, name, price, stockQuantity, categories);
         this.author = author;
         this.isbn = isbn;
     }
