@@ -26,7 +26,6 @@ public class ItemRepository {
     }
 
     public List<Item> findAll() {
-        em.createQuery("DELETE FROM Item i WHERE i.id = :id").executeUpdate();
         return em.createQuery("SELECT i FROM Item i", Item.class)
                 .getResultList();
     }
