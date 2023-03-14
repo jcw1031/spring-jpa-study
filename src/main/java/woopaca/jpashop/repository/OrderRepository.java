@@ -40,8 +40,12 @@ public class OrderRepository {
 
         //주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
-            jpql += " where";
-            isFirstCondition = false;
+            if (isFirstCondition) {
+                jpql += " where";
+                isFirstCondition = false;
+            } else {
+                jpql += " and";
+            }
             jpql += " o.status = :status";
         }
 
@@ -53,7 +57,7 @@ public class OrderRepository {
             } else {
                 jpql += " and";
             }
-            jpql += " m.name like %:name%";
+            jpql += " m.name like :name";
         }
 
         TypedQuery<Order> query = em.createQuery(jpql, Order.class)

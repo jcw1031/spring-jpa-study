@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import woopaca.jpashop.domain.Member;
+import woopaca.jpashop.domain.Order;
 import woopaca.jpashop.domain.item.Item;
+import woopaca.jpashop.repository.OrderSearch;
 import woopaca.jpashop.service.ItemService;
 import woopaca.jpashop.service.MemberService;
 import woopaca.jpashop.service.OrderService;
@@ -38,5 +40,13 @@ public class OrderController {
     public String createOrder(@ModelAttribute OrderForm orderForm) {
         orderService.order(orderForm.getMemberId(), orderForm.getItemId(), orderForm.getCount());
         return "redirect:/orders";
+    }
+
+    @GetMapping("")
+    public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
+        List<Order> orders = orderService.findOrders(orderSearch);
+        model.addAttribute("orders", orders);
+
+        return "order/orderList";
     }
 }

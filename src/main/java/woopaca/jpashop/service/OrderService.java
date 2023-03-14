@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woopaca.jpashop.domain.Delivery;
+import woopaca.jpashop.domain.DeliveryStatus;
 import woopaca.jpashop.domain.Member;
 import woopaca.jpashop.domain.Order;
 import woopaca.jpashop.domain.OrderItem;
@@ -11,6 +12,9 @@ import woopaca.jpashop.domain.item.Item;
 import woopaca.jpashop.repository.ItemRepository;
 import woopaca.jpashop.repository.MemberRepository;
 import woopaca.jpashop.repository.OrderRepository;
+import woopaca.jpashop.repository.OrderSearch;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +37,7 @@ public class OrderService {
         // 배송정보 생성
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
+        delivery.setStatus(DeliveryStatus.READY);
 
         // 주문 상품 생성
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
@@ -59,7 +64,7 @@ public class OrderService {
     /**
      * 주문 검색
      */
-    /*public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAll(orderSearch);
-    }*/
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }
