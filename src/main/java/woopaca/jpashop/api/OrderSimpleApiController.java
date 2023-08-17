@@ -9,6 +9,8 @@ import woopaca.jpashop.domain.Order;
 import woopaca.jpashop.domain.OrderStatus;
 import woopaca.jpashop.repository.OrderRepository;
 import woopaca.jpashop.repository.OrderSearch;
+import woopaca.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
+import woopaca.jpashop.repository.order.simplequery.OrderSimpleQueryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 public class OrderSimpleApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     // StackOverflowError
     @GetMapping("/api/v1/simple-orders")
@@ -43,6 +46,19 @@ public class OrderSimpleApiController {
         return orders.stream()
                 .map(SimpleOrderDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+        return orders.stream()
+                .map(SimpleOrderDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> ordersV4() {
+        return orderSimpleQueryRepository.findOrdersDto();
     }
 
     @Data
