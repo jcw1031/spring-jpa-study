@@ -1,5 +1,6 @@
 package woopaca.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +30,7 @@ public class Member {
     @Embedded
     private Address address;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member") // 상대의 member 필드에 의해 매핑됨을 명시. 읽기 전 -> 이곳의 값을 변경해도 FK 값이 변경되지 않는다.
     private List<Order> orders = new ArrayList<>();
 }
